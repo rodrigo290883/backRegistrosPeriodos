@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{2089E363-2D6C-498F-8840-AA0BA6E10FE9}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="backRegistrosPeriodos/DAL/LogDAL.cs">
+    <Files>
+      <File FileName="backRegistrosPeriodos/appsettings.json" Line="1" Column="1" />
+      <File FileName="backRegistrosPeriodos/Program.cs" Line="6" Column="23" />
+      <File FileName="backRegistrosPeriodos/Models/LogClass.cs" Line="3" Column="32" />
+      <File FileName="backRegistrosPeriodos/Models/RegistroPeriodoClass.cs" Line="3" Column="32" />
+      <File FileName="backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" Line="5" Column="19" />
+      <File FileName="backRegistrosPeriodos/DAL/LogDAL.cs" Line="8" Column="29" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="backRegistrosPeriodos" expanded="True">
+            <Node name="backRegistrosPeriodos" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
+              </Node>
+              <Node name="DAL" expanded="True">
+                <Node name="LogDAL.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.backRegistrosPeriodos FirstBuild="True" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
