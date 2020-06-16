@@ -2,10 +2,10 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="backRegistrosPeriodos/DAL/LogDAL.cs">
     <Files>
       <File FileName="backRegistrosPeriodos/appsettings.json" Line="1" Column="1" />
-      <File FileName="backRegistrosPeriodos/Program.cs" Line="6" Column="23" />
-      <File FileName="backRegistrosPeriodos/Models/LogClass.cs" Line="3" Column="32" />
-      <File FileName="backRegistrosPeriodos/Models/RegistroPeriodoClass.cs" Line="3" Column="32" />
-      <File FileName="backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" Line="5" Column="19" />
+      <File FileName="backRegistrosPeriodos/Program.cs" />
+      <File FileName="backRegistrosPeriodos/Models/LogClass.cs" />
+      <File FileName="backRegistrosPeriodos/Models/RegistroPeriodoClass.cs" />
+      <File FileName="backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" />
       <File FileName="backRegistrosPeriodos/DAL/LogDAL.cs" Line="8" Column="29" />
     </Files>
     <Pads>
