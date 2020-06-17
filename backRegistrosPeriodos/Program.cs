@@ -10,8 +10,17 @@ namespace repordatorio
         private static IConfiguration _iconfiguration;
         static void Main(string[] args)
         {
-            GetAppSettingsFile();
-            ProcesaRegistrosPeriodo();        
+            if(args.Length == 0)
+            {
+                GetAppSettingsFile();
+                ProcesaRegistrosPeriodo("");
+            }
+            else
+            {
+                GetAppSettingsFile();
+                ProcesaRegistrosPeriodo(args[0]);
+            }
+                  
         }
         static void GetAppSettingsFile()
         {
@@ -20,10 +29,10 @@ namespace repordatorio
                                  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             _iconfiguration = builder.Build();
         }
-        static void ProcesaRegistrosPeriodo()
+        static void ProcesaRegistrosPeriodo(string inicio)
         {
             var registrosDAL = new RegistrosPeriodoDAL(_iconfiguration);
-            var listRegistrosModel = registrosDAL.GetList();
+            var listRegistrosModel = registrosDAL.GetList(inicio);
             var logs = registrosDAL.InsertarRegistros(listRegistrosModel);
             var logDal = new LogDAL(_iconfiguration);
             foreach(LogClass log in logs)
