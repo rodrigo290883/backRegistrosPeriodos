@@ -75,26 +75,33 @@ namespace backRegistrosPeriodos.DAL
                 {
                     string query = "";
 
-                    if (inicio != "" && inicio != "all")
+                    if (inicio != "" && inicio != "all" && inicio != "start")
                     {
                         query = "SELECT idsap,GETDATE() as fecha_creacion,gen.genera_dias,datepart(yyyy,getdate()) as periodo,DATEADD(month,13,Convert(date,CONCAT(datepart(yyyy,getdate()),'-',(datepart(mm,e.fecha_ingreso_uen)),'-',datepart(dd,e.fecha_ingreso_uen)))) as caducidad " +
                         "FROM empleados e left join regla_genera_dias gen on DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) BETWEEN gen.meses_min and gen.meses_max and gen.esquema = e.esquema " +
-                        "WHERE DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) >= 6 and CONVERT(date, CONCAT(datepart(yyyy, getdate()), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen))) between  CONVERT(date,@inicio) and CONVERT(date, GETDATE()); ";
-    
+                        "WHERE e.tipo IN ('S','L') and DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) >= 6 and CONVERT(date, CONCAT(datepart(yyyy, getdate()), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen))) between  CONVERT(date,@inicio) and CONVERT(date, GETDATE()); ";
+
                     }
-                    else if(inicio == "all")
+                    else if (inicio == "start")
+                    {
+                        query = "SELECT e.idsap,GETDATE() as fecha_creacion,e.dias_disponibles,datepart(yyyy,getdate()) as periodo,"+
+                            "DATEADD(month, 13, Convert(date, CONCAT(datepart(yyyy, getdate()), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen)))) as caducidad "+
+                            "FROM empleados e WHERE e.tipo IN ('S','L'); ";
+
+                    }
+                    else if (inicio == "all")
                     {
                         query = "SELECT idsap,GETDATE() as fecha_creacion,gen.genera_dias,datepart(yyyy,getdate()) as periodo,DATEADD(month,13,Convert(date,CONCAT(datepart(yyyy,getdate()),'-',(datepart(mm,e.fecha_ingreso_uen)),'-',datepart(dd,e.fecha_ingreso_uen)))) as caducidad " +
                         "FROM empleados e left join regla_genera_dias gen on DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) BETWEEN gen.meses_min and gen.meses_max and gen.esquema = e.esquema " +
-                        "WHERE DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) >= 6 ; ";
+                        "WHERE DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) >= 6  and tipo IN('S','L'); ";
 
                     }
                     else
                     {
                         query = "SELECT idsap,GETDATE() as fecha_creacion,gen.genera_dias,datepart(yyyy,getdate()) as periodo,DATEADD(month,13,Convert(date,CONCAT(datepart(yyyy,getdate()),'-',(datepart(mm,e.fecha_ingreso_uen)),'-',datepart(dd,e.fecha_ingreso_uen)))) as caducidad " +
                         "FROM empleados e left join regla_genera_dias gen on DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) BETWEEN gen.meses_min and gen.meses_max and gen.esquema = e.esquema " +
-                        "WHERE DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) >= 6 and CONVERT(date, CONCAT(datepart(yyyy, getdate()), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen))) = CONVERT(date, GETDATE()); ";
-                        
+                        "WHERE DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) >= 6 and CONVERT(date, CONCAT(datepart(yyyy, getdate()), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen))) = CONVERT(date, GETDATE()) and tipo IN('S','L'); ";
+
                     }
 
                     SqlCommand cmd = new SqlCommand(query, con);
@@ -104,19 +111,28 @@ namespace backRegistrosPeriodos.DAL
 
 
                     con.Open();
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                    while (rdr.Read())
+                    try
                     {
-                        listRegistrosModel.Add(new RegistroPeridoClass
+                        SqlDataReader rdr = cmd.ExecuteReader();
+                        while (rdr.Read())
                         {
-                            
-                            idsap = Convert.ToInt32(rdr[0]),
-                            fecha_creacion = Convert.ToDateTime(rdr.IsDBNull(1) ? null : rdr[1]),
-                            disponibles = Convert.ToInt32(rdr[2]),
-                            periodo = rdr[3].ToString(),
-                            caducidad = Convert.ToDateTime(rdr.IsDBNull(4) ? null : rdr[4])
-                        });
+                            listRegistrosModel.Add(new RegistroPeridoClass
+                            {
+
+                                idsap = Convert.ToInt32(rdr[0]),
+                                fecha_creacion = Convert.ToDateTime(rdr.IsDBNull(1) ? null : rdr[1]),
+                                disponibles = Convert.ToInt32(rdr[2]),
+                                periodo = rdr[3].ToString(),
+                                caducidad = Convert.ToDateTime(rdr.IsDBNull(4) ? null : rdr[4])
+                            });
+                        }
                     }
+                    catch(SqlException ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+
+                    
                     con.Close();
                 }
             }
