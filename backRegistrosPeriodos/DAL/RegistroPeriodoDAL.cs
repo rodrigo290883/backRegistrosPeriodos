@@ -27,7 +27,7 @@ namespace backRegistrosPeriodos.DAL
                     using (SqlConnection con = new SqlConnection(_connectionString))
                     {
                         foreach (RegistroPeridoClass registro in registros) { 
-                            SqlCommand cmd = new SqlCommand("Select periodo from registros_dias where idsap = @idsap and periodo = datepart(yyyy,getdate())", con);
+                            SqlCommand cmd = new SqlCommand("Select periodo from registros_dias where idsap = @idsap and periodo = datepart(yyyy,getdate()) and caducidad >= getdate()", con);
                             cmd.Parameters.AddWithValue("@idsap", registro.idsap);
 
                             con.Open();
