@@ -38,6 +38,7 @@ namespace repordatorio
             foreach(LogClass log in logs)
             {
                 logDal.createLog(log);
+                Console.WriteLine("Se Genero el registro: "+log.registro+" ,idsap: "+log.idsap+" ,log: "+log.log);
             }
 
             Console.WriteLine("Final del Proceso");
