@@ -16,7 +16,7 @@ namespace backRegistrosPeriodos.DAL
             _connectionString = iconfiguration.GetConnectionString("MyConnection");
         }
 
-        public List<LogClass> InsertarRegistros(List<RegistroPeridoClass> registros)
+        public List<LogClass> InsertarRegistros(List<RegistroPeridoClass> registros,string inicio)
         {
             var listLogs = new List<LogClass>();
             
@@ -28,8 +28,9 @@ namespace backRegistrosPeriodos.DAL
                     {
                         foreach (RegistroPeridoClass registro in registros) {
 
-                            SqlCommand cmd = new SqlCommand("Select registro,tipo,dias,disponibles from registros_dias where idsap = @idsap and periodo = datepart(yyyy,getdate()) and caducidad >= getdate()", con);
+                            SqlCommand cmd = new SqlCommand("Select registro,tipo,dias,disponibles from registros_dias where idsap = @idsap and periodo = datepart(yyyy,CONVERT(date,@inicio)) and caducidad >= CONVERT(date,@inicio)", con);
                             cmd.Parameters.AddWithValue("@idsap", registro.idsap);
+                            cmd.Parameters.AddWithValue("@inicio", inicio);
 
                             con.Open();
      

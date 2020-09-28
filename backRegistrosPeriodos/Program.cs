@@ -33,7 +33,7 @@ namespace repordatorio
         {
             var registrosDAL = new RegistrosPeriodoDAL(_iconfiguration);
             var listRegistrosModel = registrosDAL.GetList(inicio);
-            var logs = registrosDAL.InsertarRegistros(listRegistrosModel);
+            var logs = registrosDAL.InsertarRegistros(listRegistrosModel,inicio);
             var logDal = new LogDAL(_iconfiguration);
             foreach(LogClass log in logs)
             {
