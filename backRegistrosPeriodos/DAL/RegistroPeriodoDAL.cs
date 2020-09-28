@@ -123,13 +123,13 @@ namespace backRegistrosPeriodos.DAL
 
                     if (inicio != "")
                     {
-                        query = "SELECT idsap,GETDATE() as fecha_creacion,gen.genera_dias,datepart(yyyy,getdate()) as periodo,DATEADD(month,13,Convert(date,CONCAT(datepart(yyyy,getdate()),'-',(datepart(mm,e.fecha_ingreso_uen)),'-',datepart(dd,e.fecha_ingreso_uen)))) as caducidad " +
-                        "FROM empleados e left join regla_genera_dias gen on DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) BETWEEN gen.meses_min and gen.meses_max and gen.esquema = e.esquema " +
-                        "WHERE e.tipo IN ('S','L') and DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) >= 12 and CONVERT(date, CONCAT(datepart(yyyy, getdate()), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen))) =  CONVERT(date,@inicio); ";
+                        query = "SELECT idsap,CONVERT(date,@inicio) as fecha_creacion,gen.genera_dias,datepart(yyyy,CONVERT(date,@inicio)) as periodo,DATEADD(month,13,Convert(date,CONCAT(datepart(yyyy,CONVERT(date,@inicio)),'-',(datepart(mm,e.fecha_ingreso_uen)),'-',datepart(dd,e.fecha_ingreso_uen)))) as caducidad " +
+                        "FROM empleados e left join regla_genera_dias gen on DATEDIFF(month, e.fecha_ingreso_grupo, CONVERT(date,@inicio)) BETWEEN gen.meses_min and gen.meses_max and gen.esquema = e.esquema " +
+                        "WHERE e.tipo IN ('S','L') and DATEDIFF(month, e.fecha_ingreso_grupo, CONVERT(date,@inicio)) >= 12 and CONVERT(date, CONCAT(datepart(yyyy,CONVERT(date,@inicio)), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen))) =  CONVERT(date,@inicio); ";
 
-                        query2 = "SELECT idsap,GETDATE() as fecha_creacion,gen.genera_dias,datepart(yyyy,getdate()) as periodo,DATEADD(month,13,Convert(date,CONCAT(datepart(yyyy,getdate()),'-',(datepart(mm,e.fecha_ingreso_uen)),'-',datepart(dd,e.fecha_ingreso_uen)))) as caducidad " +
-                        "FROM empleados e left join regla_genera_dias gen on DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) BETWEEN gen.meses_min and gen.meses_max and gen.esquema = e.esquema " +
-                        "WHERE e.tipo IN ('S','L') and DATEDIFF(month, e.fecha_ingreso_grupo, GETDATE()) < 12 and DATEADD(month,-6,CONVERT(date, CONCAT(datepart(yyyy, getdate()), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen)))) = CONVERT(date,@inicio); ";
+                        query2 = "SELECT idsap,CONVERT(date,@inicio) as fecha_creacion,gen.genera_dias,datepart(yyyy,CONVERT(date,@inicio)) as periodo,DATEADD(month,13,Convert(date,CONCAT(datepart(yyyy,CONVERT(date,@inicio)),'-',(datepart(mm,e.fecha_ingreso_uen)),'-',datepart(dd,e.fecha_ingreso_uen)))) as caducidad " +
+                        "FROM empleados e left join regla_genera_dias gen on DATEDIFF(month, e.fecha_ingreso_grupo, CONVERT(date,@inicio)) BETWEEN gen.meses_min and gen.meses_max and gen.esquema = e.esquema " +
+                        "WHERE e.tipo IN ('S','L') and DATEDIFF(month, e.fecha_ingreso_grupo, CONVERT(date,@inicio)) < 12 and DATEADD(month,-6,CONVERT(date, CONCAT(datepart(yyyy, CONVERT(date,@inicio)), '-', (datepart(mm, e.fecha_ingreso_uen)), '-', datepart(dd, e.fecha_ingreso_uen)))) = CONVERT(date,@inicio); ";
 
                         
                     }
