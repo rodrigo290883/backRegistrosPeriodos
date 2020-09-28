@@ -47,7 +47,7 @@ namespace backRegistrosPeriodos.DAL
 
                                 if (tipo == 2) //Existe Registro de anticipo
                                 {
-                                    SqlCommand cmd2 = new SqlCommand("UPDATE registros_dias SET fecha_creacion = @fecha_creacion,periodo=@periodo,dias=@dias,disponibles=@dias_disponibles,anticipo = 1 WHERE regisro = @registro", con);
+                                    SqlCommand cmd2 = new SqlCommand("UPDATE registros_dias SET fecha_creacion = @fecha_creacion,periodo=@periodo,dias=@dias,disponibles=@dias_disponibles,tipo = 1 WHERE regisro = @registro", con);
                                     cmd2.Parameters.AddWithValue("@fecha_creacion", registro.fecha_creacion);
                                     cmd2.Parameters.AddWithValue("@periodo", registro.periodo);
                                     cmd2.Parameters.AddWithValue("@dias", dias);
@@ -56,11 +56,11 @@ namespace backRegistrosPeriodos.DAL
 
                                     cmd2.ExecuteNonQuery();
 
-                                    listLogs.Add(new LogClass { idsap = registro.idsap, log = "Se actualizo registro de anticipo:" + reg_ant + " a " + dias_disponibles + " dias disponibles para el periodo: " + registro.periodo, idsap_creacion = 101010, fecha_creacion = registro.fecha_creacion });
+                                    listLogs.Add(new LogClass { idsap = registro.idsap, log = "Se actualizo registro de tipo 1:" + reg_ant + " a " + dias_disponibles + " dias disponibles para el periodo: " + registro.periodo, idsap_creacion = 101010, fecha_creacion = registro.fecha_creacion });
                                 }
                                 else if (tipo == 1) //Existe Registro de anticipo
                                 {
-                                    SqlCommand cmd2 = new SqlCommand("UPDATE registros_dias SET fecha_creacion = @fecha_creacion,periodo=@periodo,dias=@dias,disponibles=@dias_disponibles,anticipo = 0 WHERE regisro = @registro", con);
+                                    SqlCommand cmd2 = new SqlCommand("UPDATE registros_dias SET fecha_creacion = @fecha_creacion,periodo=@periodo,dias=@dias,disponibles=@dias_disponibles,tipo = 0 WHERE regisro = @registro", con);
                                     cmd2.Parameters.AddWithValue("@fecha_creacion", registro.fecha_creacion);
                                     cmd2.Parameters.AddWithValue("@periodo", registro.periodo);
                                     cmd2.Parameters.AddWithValue("@dias", dias);
@@ -69,18 +69,18 @@ namespace backRegistrosPeriodos.DAL
 
                                     cmd2.ExecuteNonQuery();
 
-                                    listLogs.Add(new LogClass { idsap = registro.idsap, log = "Se actualizo registro de anticipo:" + reg_ant + " a " + dias_disponibles + " dias disponibles para el periodo: " + registro.periodo, idsap_creacion = 101010, fecha_creacion = registro.fecha_creacion });
+                                    listLogs.Add(new LogClass { idsap = registro.idsap, log = "Se actualizo registro de tipo 0:" + reg_ant + " a " + dias_disponibles + " dias disponibles para el periodo: " + registro.periodo, idsap_creacion = 101010, fecha_creacion = registro.fecha_creacion });
                                 }
                             }
                             else // No hay registro en el año
                             {
-                                SqlCommand cmd2 = new SqlCommand("INSERT INTO registros_dias(idsap,fecha_creacion,periodo,registro_padre,dias,disponibles,caducidad,anticipo) VALUES (@idsap,@fecha_creacion,@periodo,0,@dias,@dias,@caducidad,@anticipo) " + "SELECT CAST(scope_identity() AS int)", con);
+                                SqlCommand cmd2 = new SqlCommand("INSERT INTO registros_dias(idsap,fecha_creacion,periodo,registro_padre,dias,disponibles,caducidad,tipo) VALUES (@idsap,@fecha_creacion,@periodo,0,@dias,@dias,@caducidad,@tipo) " + "SELECT CAST(scope_identity() AS int)", con);
                                 cmd2.Parameters.AddWithValue("@idsap", registro.idsap);
                                 cmd2.Parameters.AddWithValue("@fecha_creacion", registro.fecha_creacion);
                                 cmd2.Parameters.AddWithValue("@periodo", registro.periodo);
                                 cmd2.Parameters.AddWithValue("@dias", registro.disponibles);
                                 cmd2.Parameters.AddWithValue("@caducidad", registro.caducidad);
-                                cmd2.Parameters.AddWithValue("@anticipo", registro.tipo);
+                                cmd2.Parameters.AddWithValue("@tipo", registro.tipo);
 
                                 int reg = (Int32)cmd2.ExecuteScalar();
 
