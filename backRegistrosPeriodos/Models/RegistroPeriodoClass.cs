@@ -13,5 +13,6 @@ namespace backRegistrosPeriodos.Models
         public Nullable<System.DateTime> fecha_creacion { get; set; }
         public Nullable<System.DateTime> caducidad { get; set; }
         public string periodo { get; set; }
+        public int tipo { get; set; }
     }
 }

@@ -2,21 +2,23 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs">
     <Files>
       <File FileName="backRegistrosPeriodos/appsettings.json" Line="1" Column="1" />
-      <File FileName="backRegistrosPeriodos/Program.cs" Line="25" Column="41" />
-      <File FileName="backRegistrosPeriodos/Models/LogClass.cs" Line="3" Column="32" />
-      <File FileName="backRegistrosPeriodos/Models/RegistroPeriodoClass.cs" Line="3" Column="32" />
-      <File FileName="backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" Line="97" Column="1" />
-      <File FileName="backRegistrosPeriodos/DAL/LogDAL.cs" Line="11" Column="1" />
+      <File FileName="backRegistrosPeriodos/Program.cs" />
+      <File FileName="backRegistrosPeriodos/Models/LogClass.cs" />
+      <File FileName="backRegistrosPeriodos/Models/RegistroPeriodoClass.cs" />
+      <File FileName="backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" Line="57" Column="60" />
+      <File FileName="backRegistrosPeriodos/DAL/LogDAL.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="backRegistrosPeriodos" expanded="True">
-            <Node name="backRegistrosPeriodos" expanded="True" selected="True">
+            <Node name="backRegistrosPeriodos" expanded="True">
               <Node name="Dependencies" expanded="True">
                 <Node name="FrameworkReferences" expanded="True" />
               </Node>
-              <Node name="DAL" expanded="True" />
+              <Node name="DAL" expanded="True">
+                <Node name="RegistroPeriodoDAL.cs" selected="True" />
+              </Node>
               <Node name="Models" expanded="True" />
             </Node>
           </Node>
@@ -28,7 +30,10 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/rodrigolira/Proyectos/Vacaciones/backRegistrosPeriodos/backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" relfile="backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" line="50" column="1" />
+      <Breakpoint file="/Users/rodrigolira/Proyectos/Vacaciones/backRegistrosPeriodos/backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" relfile="backRegistrosPeriodos/DAL/RegistroPeriodoDAL.cs" line="21" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
