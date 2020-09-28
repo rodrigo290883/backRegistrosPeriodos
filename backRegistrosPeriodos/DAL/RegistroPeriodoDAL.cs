@@ -42,6 +42,8 @@ namespace backRegistrosPeriodos.DAL
                                 int dias = Convert.ToInt32(rdr[2]);
                                 int dias_disponibles = Convert.ToInt32(rdr[3]);
 
+                                rdr.Close();
+
                                 dias = dias + registro.dias;
                                 dias_disponibles = dias_disponibles + registro.dias;
 
@@ -74,6 +76,7 @@ namespace backRegistrosPeriodos.DAL
                             }
                             else // No hay registro en el año
                             {
+                                rdr.Close();
                                 SqlCommand cmd2 = new SqlCommand("INSERT INTO registros_dias(idsap,fecha_creacion,periodo,registro_padre,dias,disponibles,caducidad,tipo) VALUES (@idsap,@fecha_creacion,@periodo,0,@dias,@dias,@caducidad,@tipo) " + "SELECT CAST(scope_identity() AS int)", con);
                                 cmd2.Parameters.AddWithValue("@idsap", registro.idsap);
                                 cmd2.Parameters.AddWithValue("@fecha_creacion", registro.fecha_creacion);
@@ -87,7 +90,7 @@ namespace backRegistrosPeriodos.DAL
                                 listLogs.Add(new LogClass { idsap = registro.idsap, log = "Se genera registro:" + reg + " de " + registro.disponibles + " dias disponibles para el periodo: " + registro.periodo, idsap_creacion = 101010, fecha_creacion = registro.fecha_creacion });
                             }
 
-                            rdr.Close();
+                            
                             con.Close();
                         }
                         
